@@ -126,6 +126,10 @@ export default {
     <b-form>
         <b-card title="Approve Transaction" bg-variant="light">
             <RequestInfo></RequestInfo>
+            
+            <b-alert show variant="danger" v-for="item in store.state.pending.params[0].call_info" :key="item.message" v-if="item.type === 'CRITICAL'">{{item.message}}</b-alert>
+            <b-alert show variant="warning" v-for="item in store.state.pending.params[0].call_info" :key="item.message" v-if="item.type === 'WARNING'">{{item.message}}</b-alert>
+            <b-alert show variant="info" v-for="item in store.state.pending.params[0].call_info" :key="item.message" v-if="item.type === 'Info'">{{item.message}}</b-alert>
 
             <b-form-group vertical
                         breakpoint="lg"
@@ -133,9 +137,7 @@ export default {
                         label-size="mg"
                         label-class="font-weight-bold pt-0"
                         class="mb-0">
-              <b-container>
 
-              </b-container>
               <b-form-group horizontal
                               label="From:"
                               label-class="text-sm-right"
@@ -205,8 +207,7 @@ export default {
                               label-for="pass">
                   <b-form-input type="password" v-model="passphrase" :disabled="disabled" id="pass"></b-form-input>
               </b-form-group>             
-            </b-form-group>
-            
+            </b-form-group>        
             <b-container>
                 <b-row class="text-center">
                     <b-col class="py-3">
